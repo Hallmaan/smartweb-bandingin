@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'HomeController@home')->name('dashboard');
 Route::group(['middleware' => ['auth']], function() {
 
-    Route::get('/', 'HomeController@home')->name('dashboard');
     Route::post('/search', 'HomeController@search')->name('search');
     Route::post('/save/history', 'HomeController@save_history')->name('save');
 
@@ -26,10 +26,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/history/{user_id}', 'HomeController@history')->name('history');
 
 
-    Route::get('/pricing', function () {
-        return view('users.pricing.index');
-    })->name('pricing');
 });
+Route::get('/pricing', function () {
+    return view('users.pricing.index');
+})->name('pricing');
 
 // Route::name('user.')->prefix('user')->middleware('auth')->group(function() {
 //     return view('users.profile.index');

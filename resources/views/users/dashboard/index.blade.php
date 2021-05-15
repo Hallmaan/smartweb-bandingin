@@ -104,15 +104,15 @@ Dashboard
         </div>
         <div class="form-group">
           <label>Nama Barang</label>
-          <input type="text" name="nama_barang" class="form-control colorpickerinput">
+          <input type="text" name="nama_barang" class="form-control colorpickerinput" required>
         </div>
         <div class="form-group">
           <label>Harga Maximum Barang</label>
-          <input type="number" name="harga_maximum" class="form-control colorpickerinput">
+          <input type="number" name="harga_maximum" class="form-control colorpickerinput" required>
         </div>
         <div class="form-group">
           <label>Limit Data</label>
-          <input type="number" name="limit_data" class="form-control colorpickerinput">
+          <input type="number" name="limit_data" class="form-control colorpickerinput" required>
         </div>
         <button type="submit" id="checkBtn" class="btn btn-primary">Cari Barang</button>
       </div>
