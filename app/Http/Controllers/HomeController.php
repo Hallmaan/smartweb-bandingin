@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\SiteCategory;
 use App\Classes\Scraping\TokopediaScraping;
+use App\Classes\Scraping\BukalapakScraping;
 use App\HistorySearch;
 use Illuminate\Http\Request;
 use Auth;
@@ -24,7 +25,7 @@ class HomeController extends Controller
     public function history(Request $r, $user_id){
         $user = User::findorfail($user_id);
 
-        $history = HistorySearch::where('user_id', Auth::user()->id)->get();
+        $history = HistorySearch::where('user_id', Auth::user()->id)->paginate(5);
         
         return view('users.history.index', ['data' => $history]);
     }
@@ -63,8 +64,12 @@ class HomeController extends Controller
                     $isTokped = true;
                     break;
                 case 2:
-                    $scrapBukalapak = '';
-                    $isBukalapak = false;
+                    $scrapBukalapak = new BukalapakScraping([
+                        'limit' => $r->limit_data,
+                        'nama_barang' => $r->nama_barang,
+                        'harga_maximum' => $r->harga_maximum
+                    ]);
+                    $isBukalapak = true;
                     break;
             }
         }
@@ -75,7 +80,7 @@ class HomeController extends Controller
 
         
         $tokopedia = $isTokped == true ? $scrapTokped->call() : [];
-        $bukapalak = $isBukalapak == true ? $scrapBukalapak : [];
+        $bukapalak = $isBukalapak == true ? $scrapBukalapak->call() : [];
 
         $scrap_data_tokped['site_name'] = 'Tokopedia';
         $scrap_data_tokped['data_scrap'] = $tokopedia;

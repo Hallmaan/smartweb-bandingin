@@ -2,7 +2,7 @@
 
 namespace App\Classes\Scraping;
 
-class TokopediaScraping
+class BukalapakScraping
 {
 
     private $limit;
@@ -44,41 +44,44 @@ class TokopediaScraping
     {
         $search = $this->nama_barang;
         $show_amount = $this->limit;
+        $accessToken = "fg6iYuj4afYrA_9qlMwchzgRGmG1oP9B_fMqWl6YUGYKYQ";
         // $location = 'jakarta';
 
         $search = str_replace(' ', '%20', $search);
 
-
-        $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=" . $show_amount . "&src=search&device=desktop&page=2&pmax=" .$this->max_harga. "&q=" . $search . "&fshop=1";
+        $url = "https://api.bukalapak.com/multistrategy-products?prambanan_override=true&keywords=". $search ."&limit=". $show_amount ."&offset=0&page=1&facet=true&filter_non_popular_section=true&access_token=" . $accessToken;
 
         $data = $this->http_request($url);
+        // dd($data);
 
         
         // ubah string JSON menjadi array
         $data = json_decode($data, TRUE);
-        // dd($data);
+        $sliced = array_slice($data['data'], 0, $show_amount);
 
+        
         $arrayProduct = [];
         
-        foreach($data['data'] as $key){
-            $x['shop_click'] = $key['shop_click_url'];
-            $x['product_wishlist_url'] = $key['product_wishlist_url'];
-            $x['product_click_url'] = $key['product']['uri'];
-            $x['product_name'] = $key['product']['name'];
-            $x['product_uri'] = $key['product']['uri'];
-            $x['product_img_url'] = $key['product']['image']['ms_ecs'];
-            $x['product_price_format'] = "Rp " . number_format($key['product']['price'],2,',','.');
-            $x['shop_location'] = $key['shop']['location'];
-            $x['shop_name'] = $key['shop']['name'];
-            $x['site_category_id'] = 1;
+        foreach($sliced as $key){
+            $x['shop_click'] = '';
+            $x['product_wishlist_url'] = '';
+            $x['product_click_url'] = $key['url'];
+            $x['product_name'] = $key['name'];
+            $x['product_uri'] = $key['url'];
+            $x['product_img_url'] = $key['images']['large_urls'][0];
+            $x['product_price_format'] =  "Rp " . number_format($key['price'],2,',','.');
+            $x['shop_location'] = $key['store']['address']['city'];
+            $x['shop_name'] = $key['store']['name'];
+            $x['site_category_id'] = 2;
             $arrayProduct[] = $x;
         }
-
+        
+        // dd($arrayProduct);
         return $arrayProduct;
 
-        // $data['site_name'] = 'Tokopedia';
-        // $data['data'] = $arrayProduct;
+        $data['site_name'] = 'Bukalapak';
+        $data['data'] = $arrayProduct;
 
-        // return $data;
+        return $data;
     }
 }

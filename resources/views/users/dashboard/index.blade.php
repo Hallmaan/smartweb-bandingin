@@ -134,7 +134,7 @@ Dashboard
         $length = count($key['data_scrap']);
         // dd('lslsls');
         for ($i = 0; $i < $length; $i++) {
-          $key['data_scrap'][$i]['custom_text'] = 'checkbox-' . $i;
+          $key['data_scrap'][$i]['custom_text'] = 'checkbox-' . $key['site_name'] . $i;
         }
         ?>
         <div class="card-header">
@@ -188,10 +188,5 @@ Dashboard
     </div>
   </div>
   </form>
-  <div class="card">
-    <div class="card-header">Data count = {{ isset($data_count) ? $data_count : 0 }}</div>
-  </div>
-  <div class="section-body">
-  </div>
 </section>
 @endsection

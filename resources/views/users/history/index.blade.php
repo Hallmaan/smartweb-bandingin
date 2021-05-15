@@ -9,8 +9,8 @@ Dashboard
     <div class="section-header">
         <h1>History</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="#">History</a></div>
+            <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item active"><a href="#">History</a></div>
             <div class="breadcrumb-item">All History</div>
         </div>
     </div>
@@ -101,31 +101,7 @@ Dashboard
                             </table>
                         </div>
                         <div class="float-right">
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                                {{ $data->links() }}
                         </div>
                     </div>
                 </div>
