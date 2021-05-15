@@ -13,6 +13,7 @@ class TokopediaScraping
     {
         $this->limit = $options['limit'];
         $this->nama_barang = $options['nama_barang'];
+        $this->max_harga = $options['harga_maximum'];
     }
 
     private function http_request($url)
@@ -43,12 +44,12 @@ class TokopediaScraping
     {
         $search = $this->nama_barang;
         $show_amount = $this->limit;
-        $location = 'jakarta';
+        // $location = 'jakarta';
 
         $search = str_replace(' ', '%20', $search);
 
 
-        $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=" . $show_amount . "&src=search&device=desktop&page=2&q=" . $search . "&fshop=1";
+        $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=" . $show_amount . "&src=search&device=desktop&page=2&pmax=" .$this->max_harga. "&q=" . $search . "&fshop=1";
 
         $data = $this->http_request($url);
 

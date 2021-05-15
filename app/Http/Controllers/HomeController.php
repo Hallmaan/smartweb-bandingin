@@ -18,6 +18,18 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function save_history(Request $r){
+
+        $data = $r->scrap_data;
+
+        foreach($data as $key){
+            $decoded = json_decode($key);
+            // dd($decoded);
+        }
+
+        // dd(json_decode($r->scrap_data[0]));
+    }
+
     public function search(Request $r){
         // dd($r->all());
         $site_category = SiteCategory::all();
@@ -29,6 +41,7 @@ class HomeController extends Controller
                 $site = new TokopediaScraping([
                     'limit' => $r->limit_data,
                     'nama_barang' => $r->nama_barang,
+                    'harga_maximum' => $r->harga_maximum
                 ]);
                 break;
             // case 2:

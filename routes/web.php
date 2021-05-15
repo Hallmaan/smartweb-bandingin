@@ -14,7 +14,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/', 'HomeController@home')->name('dashboard');
     Route::post('/search', 'HomeController@search')->name('search');
-
+    Route::post('/save/history', 'HomeController@save_history')->name('save');
 
     Route::get('/profile', function () {
         return view('users.profile.index');

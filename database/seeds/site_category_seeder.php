@@ -17,9 +17,9 @@ class site_category_seeder extends Seeder
         // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $data  = [
-        ['name' => 'tokopedia'],
-        ['name' => 'bukalapak'],
-        ['name' => 'shopee'],
+        ['name' => 'Tokopedia'],
+        ['name' => 'Bukalapak'],
+        ['name' => 'Shopee'],
         ];
 
         foreach ($data as $d) {
