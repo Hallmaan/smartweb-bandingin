@@ -96,7 +96,7 @@ Dashboard
           <div class="selectgroup selectgroup-pills">
             @foreach($site as $key)
             <label class="selectgroup-item">
-              <input type="checkbox" name="site_id" value="{{$key->id}}" class="selectgroup-input">
+              <input type="checkbox" name="site_id[]" value="{{$key->id}}" class="selectgroup-input">
               <span class="selectgroup-button">{{ $key->name }}</span>
             </label>
             @endforeach
@@ -124,18 +124,21 @@ Dashboard
     <div class="col-12">
       <div class="card">
         @if(!empty($data))
+        <div class="card-header">
+            <div class="buttons"> <button type="submit" id="saveBtn" class="btn btn-primary">Save</button>
+            </div>
+          </div>
         @foreach($data as $key)
         <?php
-        for ($i = 0; $i < count($key['data_scrap']); $i++) {
+        // dd($data);
+        $length = count($key['data_scrap']);
+        // dd('lslsls');
+        for ($i = 0; $i < $length; $i++) {
           $key['data_scrap'][$i]['custom_text'] = 'checkbox-' . $i;
         }
         ?>
         <div class="card-header">
           <h4>{{ $key['site_name'] }}</h4>
-          <div class="card-header-form">
-            <div class="buttons"> <button type="submit" id="saveBtn" class="btn btn-primary">Save</button>
-            </div>
-          </div>
         </div>
         <div class="card-body p-0">
           <div class="table-responsive">

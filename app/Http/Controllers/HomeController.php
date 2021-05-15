@@ -48,31 +48,70 @@ class HomeController extends Controller
         // dd($r->all());
         $site_category = SiteCategory::all();
         $site_id = $r->site_id;
-        $siteScraping = SiteCategory::findorfail($site_id);
-
-        switch($site_id) {
-            case 1:
-                $site = new TokopediaScraping([
-                    'limit' => $r->limit_data,
-                    'nama_barang' => $r->nama_barang,
-                    'harga_maximum' => $r->harga_maximum
-                ]);
-                break;
-            // case 2:
-            //     $site = new BukalapakScraping([
-            //         'limit' => $r->limit_data,
-            //         'nama_barang' => $r->nama_barang,
-            //     ]);
-            //     break;
+        $isTokped = false;
+        $isBukalapak = false;
+        
+        foreach($site_id as $key){
+            // dd($key);
+            switch($key) {
+                case 1:
+                    $scrapTokped = new TokopediaScraping([
+                        'limit' => $r->limit_data,
+                        'nama_barang' => $r->nama_barang,
+                        'harga_maximum' => $r->harga_maximum
+                    ]);
+                    $isTokped = true;
+                    break;
+                case 2:
+                    $scrapBukalapak = '';
+                    $isBukalapak = true;
+                    break;
+            }
         }
+
         $x = [];
 
-        $scrap_data['site_name'] = $siteScraping->name;
-        $scrap_data['data_scrap'] = $site->call();
+        $scrap_data = [];
+
         
+        $tokopedia = $isTokped == true ? $scrapTokped->call() : '';
+        $bukapalak = $isBukalapak == true ? $scrapBukalapak : '';
+
+        $scrap_data_tokped['site_name'] = 'Tokopedia';
+        $scrap_data_tokped['data_scrap'] = $tokopedia;
+
+        $scrap_data_bl['site_name'] = 'Bukalapak';
+        $scrap_data_bl['data_scrap'] = [];
+
+        if($isTokped){
+            array_push($scrap_data, $scrap_data_tokped);
+        }if($isBukalapak){
+            array_push($scrap_data, $scrap_data_bl);
+        }
+
+
+        // $scrap_data = [
+        //     $scrap_data_tokped,
+        //     $scrap_data_bl
+        // ];
+
+        // RESULT ARRAY DATA
+        
+        // [
+        //     1 => [
+        //         'site_name' => 'Tokopedia'
+        //         'data' => data[]
+        //     ],
+        //     2 => [
+        //         'site_name' => 'Bukalapak'
+        //         'data' => data[]
+        //     ]  
+        // ]
+
+
         $x[] = $scrap_data;
         
-        return view('users.dashboard.index',['site' => $site_category, 'data' => $x, 'data_count' => $r->limit_data]);
+        return view('users.dashboard.index',['site' => $site_category, 'data' => $scrap_data, 'data_count' => $r->limit_data]);
     }
 
 

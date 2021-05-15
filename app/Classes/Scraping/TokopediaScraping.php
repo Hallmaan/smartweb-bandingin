@@ -75,5 +75,10 @@ class TokopediaScraping
         }
 
         return $arrayProduct;
+
+        // $data['site_name'] = 'Tokopedia';
+        // $data['data'] = $arrayProduct;
+
+        // return $data;
     }
 }
