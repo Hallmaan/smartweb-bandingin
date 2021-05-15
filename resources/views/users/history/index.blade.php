@@ -60,7 +60,7 @@ Dashboard
                             <table class="table table-striped">
                                 <tr>
                                     <th>
-                                        List
+                                        Site
                                     </th>
                                     <th>Nama Produk</th>
                                     <th>Nama Toko</th>
@@ -72,11 +72,15 @@ Dashboard
                                 @foreach($data as $history)
                                 <tr>
 
-                                    <td class="p-0 text-center">
-                                        <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" name="scrap_data[]" data-checkboxes="mygroup" class="custom-control-input" id="{{$history['custom_text']}}" value="{{json_encode($history)}}">
-                                            <label for="{{$history['custom_text']}}" class="custom-control-label">&nbsp;</label>
-                                        </div>
+                                    <td>
+                                    <?php
+                                        if($history['site_category_id']== 1){
+                                            $sitee = 'Tokopedia';
+                                        } else if ($history['site_category_id'] == 2){
+                                            $sitee = 'Bukalapak';
+                                        }
+                                    ?>
+                                        <strong>{{$sitee}}<strong>
                                     </td>
                                     <td>{{ $history['product_name'] }}</td>
                                     <td>{{ $history['shop_name'] }}</td>

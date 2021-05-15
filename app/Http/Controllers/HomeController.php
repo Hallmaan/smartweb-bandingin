@@ -64,7 +64,7 @@ class HomeController extends Controller
                     break;
                 case 2:
                     $scrapBukalapak = '';
-                    $isBukalapak = true;
+                    $isBukalapak = false;
                     break;
             }
         }
@@ -74,39 +74,20 @@ class HomeController extends Controller
         $scrap_data = [];
 
         
-        $tokopedia = $isTokped == true ? $scrapTokped->call() : '';
-        $bukapalak = $isBukalapak == true ? $scrapBukalapak : '';
+        $tokopedia = $isTokped == true ? $scrapTokped->call() : [];
+        $bukapalak = $isBukalapak == true ? $scrapBukalapak : [];
 
         $scrap_data_tokped['site_name'] = 'Tokopedia';
         $scrap_data_tokped['data_scrap'] = $tokopedia;
 
         $scrap_data_bl['site_name'] = 'Bukalapak';
-        $scrap_data_bl['data_scrap'] = [];
+        $scrap_data_bl['data_scrap'] = $bukapalak;
 
         if($isTokped){
             array_push($scrap_data, $scrap_data_tokped);
         }if($isBukalapak){
             array_push($scrap_data, $scrap_data_bl);
         }
-
-
-        // $scrap_data = [
-        //     $scrap_data_tokped,
-        //     $scrap_data_bl
-        // ];
-
-        // RESULT ARRAY DATA
-        
-        // [
-        //     1 => [
-        //         'site_name' => 'Tokopedia'
-        //         'data' => data[]
-        //     ],
-        //     2 => [
-        //         'site_name' => 'Bukalapak'
-        //         'data' => data[]
-        //     ]  
-        // ]
 
 
         $x[] = $scrap_data;
