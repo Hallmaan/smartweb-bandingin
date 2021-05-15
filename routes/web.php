@@ -11,16 +11,21 @@
 |
 */
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/', function () {
-        // return view('users.dashboard.index')->name('dashboard');
-        return view('users.dashboard.index');
-    });
+
+    Route::get('/', 'HomeController@home')->name('dashboard');
+    Route::post('/search', 'HomeController@search')->name('search');
+
+
     Route::get('/profile', function () {
         return view('users.profile.index');
     });
     Route::get('/history', function () {
         return view('users.history.index');
     });
+
+    Route::get('/pricing', function () {
+        return view('users.pricing.index');
+    })->name('pricing');
 });
 
 // Route::name('user.')->prefix('user')->middleware('auth')->group(function() {

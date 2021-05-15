@@ -74,11 +74,13 @@ Dashboard
       <div class="hero bg-primary text-white">
         <div class="hero-inner">
           <h2>IKLAN HERE</h2>
-          <p class="lead">Widget ini untuk promosi iklan</p>
+          <p class="lead">Widget ini untuk promosi iklan <a style="color:red;" href="{{ route('pricing') }}">Klik Disini</a></p>
         </div>
       </div>
     </div>
   </div>
+  <form method="POST" action="{{ route('search') }}">
+  {{ csrf_field() }}
   <div class="card">
     <div class="card-header">
       <h4>Bandingin Sekarang!</h4>
@@ -87,40 +89,38 @@ Dashboard
       <div class="form-group">
         <label class="form-label">Pilih Online Shop</label>
         <div class="selectgroup selectgroup-pills">
+        @foreach($site as $key)
           <label class="selectgroup-item">
-            <input type="checkbox" name="value" value="HTML" class="selectgroup-input" checked="">
-            <span class="selectgroup-button">Tokopedia</span>
+            <input type="checkbox" name="site_id" value="{{$key->id}}" class="selectgroup-input">
+            <span class="selectgroup-button">{{ $key->name }}</span>
           </label>
-          <label class="selectgroup-item">
-            <input type="checkbox" name="value" value="CSS" class="selectgroup-input">
-            <span class="selectgroup-button">Bukalapak</span>
-          </label>
-          <label class="selectgroup-item">
-            <input type="checkbox" name="value" value="CSS" class="selectgroup-input">
-            <span class="selectgroup-button">Shope</span>
-          </label>
-        </div>
+        @endforeach
+          </div>
       </div>
       <div class="form-group">
         <label>Nama Barang</label>
-        <input type="text" class="form-control colorpickerinput">
+        <input type="text" name="nama_barang" class="form-control colorpickerinput">
       </div>
       <div class="form-group">
         <label>Harga Maximum Barang</label>
-        <input type="text" class="form-control colorpickerinput">
+        <input type="number" nama="harga maximum" class="form-control colorpickerinput">
       </div>
       <div class="form-group">
         <label>Limit Data</label>
-        <input type="text" class="form-control colorpickerinput">
+        <input type="number" name="limit_data" class="form-control colorpickerinput">
       </div>
-      <a href="#" class="btn btn-primary">Cari Barang</a>
+      <button type="submit" id="checkBtn" class="btn btn-primary">Cari Barang</button>
     </div>
   </div>
+  </form>
   <div class="row">
     <div class="col-12">
       <div class="card">
+        @if(!empty($data))
+        @foreach($data as $key)
+        
         <div class="card-header">
-          <h4>Tokopedia</h4>
+          <h4>{{ $key['site_name'] }}</h4>
           <div class="card-header-form">
             <div class="buttons"> <a href="#" class="btn btn-primary">Save</a>
             </div>
@@ -143,38 +143,42 @@ Dashboard
                 <th>Lokasi</th>
                 <th>Action</th>
               </tr>
+              @foreach($key['data_scrap'] as $scrap)
               <tr>
+
                 <td class="p-0 text-center">
                   <div class="custom-checkbox custom-control">
                     <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
                     <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                   </div>
                 </td>
-                <td>Masker Nih Bos</td>
-                <td>Toko Masker</td>
+                <td>{{ $scrap['product_name'] }}</td>
+                <td>{{ $scrap['shop_name'] }}</td>
                 <td>
-                  Rp. 20.000,-
+                  {{ $scrap['product_price_format'] }}
                 </td>
                 <td>
                   <div class="gallery gallery-md">
-                    <div class="gallery-item" data-image="../assets/img/news/img03.jpg" data-title="Image 1"></div>
-                    <div class="gallery-item" data-image="../assets/img/news/img14.jpg" data-title="Image 2"></div>
-                  </div>
-                  <div class="gallery-item gallery-hide" data-image="../assets/img/news/img01.jpg" data-title="Image 9"></div>
-                </td>
+                  <img src="{{ $scrap['product_img_url'] }}" class="gallery-item">
+                    <!-- <div class="gallery-item" data-image="../assets/img/news/img03.jpg" data-title="Image 1"></div> -->
+                     </div>
+                   </td>
                 <td>
-                  <div class="badge badge-warning">Jakarta Timur</div>
+                  <div class="badge badge-warning">{{ $scrap['shop_location'] }}</div>
                 </td>
-                <td><a href="#" class="btn btn-primary">Detail</a></td>
+                <td><a href="{{$scrap['product_click_url'] }}" class="btn btn-primary">Detail</a></td>
               </tr>
+                @endforeach
             </table>
           </div>
         </div>
+        @endforeach
+        @endif
       </div>
     </div>
   </div>
   <div class="card">
-    <div class="card-header">Data Count : 1</div>
+    <div class="card-header">Data count = {{ isset($data_count) ? $data_count : 0 }}</div>
   </div>
   <div class="section-body">
   </div>

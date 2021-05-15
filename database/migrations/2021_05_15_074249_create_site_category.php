@@ -15,6 +15,7 @@ class CreateSiteCategory extends Migration
     {
         Schema::create('site_category', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
