@@ -27,11 +27,7 @@
 
             <div class="text-center mt-5 text-small">
               Copyright &copy; Bandingin. Made with 💙
-              <div class="mt-2">
-                <a href="#">Privacy Policy</a>
-                <div class="bullet"></div>
-                <a href="#">Terms of Service</a>
-              </div>
+          
             </div>
           </div>
         </div>
@@ -42,7 +38,6 @@
                 <h1 class="mb-2 display-4 font-weight-bold">Bandingin Yuk!</h1>
                 <h5 class="font-weight-normal text-muted-transparent">Mercu Buana, Jakarta</h5>
               </div>
-              Photo by <a class="text-light bb" target="_blank" href="https://unsplash.com/photos/hTUZW7E7krg">Unsplash</a>
             </div>
           </div>
         </div>
