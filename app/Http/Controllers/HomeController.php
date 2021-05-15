@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\SiteCategory;
 use App\Classes\Scraping\TokopediaScraping;
+use App\HistorySearch;
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -18,16 +21,27 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function history(Request $r, $user_id){
+        $user = User::findorfail($user_id);
+
+        $history = HistorySearch::where('user_id', Auth::user()->id)->get();
+        
+        return view('users.history.index', ['data' => $history]);
+    }
+
     public function save_history(Request $r){
 
         $data = $r->scrap_data;
-
+        $x = [];
         foreach($data as $key){
-            $decoded = json_decode($key);
-            // dd($decoded);
+            $decoded = json_decode($key, true);
+            $decoded['user_id'] = Auth::user()->id;
+            $x[] = $decoded;
         }
 
-        // dd(json_decode($r->scrap_data[0]));
+        HistorySearch::insert($x);
+        $site_category = SiteCategory::all();
+        return redirect()->route('dashboard', ['site' => $site_category])->with('message', 'Berhasil menyimpan pencarian');
     }
 
     public function search(Request $r){

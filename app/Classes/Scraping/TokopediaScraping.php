@@ -70,7 +70,7 @@ class TokopediaScraping
             $x['product_price_format'] = $key['product']['price_format'];
             $x['shop_location'] = $key['shop']['location'];
             $x['shop_name'] = $key['shop']['name'];
-            $x['site_category'] = 'Tokopedia';
+            $x['site_category_id'] = 1;
             $arrayProduct[] = $x;
         }
 

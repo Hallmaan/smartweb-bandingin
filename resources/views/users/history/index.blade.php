@@ -8,9 +8,6 @@ Dashboard
 <section class="section">
     <div class="section-header">
         <h1>History</h1>
-        <div class="section-header-button">
-            <a href="features-post-create.html" class="btn btn-primary">Add New</a>
-        </div>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
             <div class="breadcrumb-item"><a href="#">History</a></div>
@@ -29,11 +26,11 @@ Dashboard
                     <div class="card-body">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Active <span class="badge badge-white">5</span></a>
+                                <a class="nav-link active" href="#">Active <span class="badge badge-white">{{ count($data) }}</span></a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="#">Dihapus <span class="badge badge-primary">1</span></a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -43,16 +40,9 @@ Dashboard
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Save Pencarian</h4>
+                        <h4>History Pencarian</h4>
                     </div>
                     <div class="card-body">
-                        <div class="float-left">
-                            <select class="form-control selectric">
-                                <option>Action For Selected</option>
-                                <option>Order Descending</option>
-                                <option>Order Ascending</option>
-                            </select>
-                        </div>
                         <div class="float-right">
                             <form>
                                 <div class="input-group">
@@ -70,10 +60,7 @@ Dashboard
                             <table class="table table-striped">
                                 <tr>
                                     <th>
-                                        <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad" class="custom-control-input" id="checkbox-all">
-                                            <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                                        </div>
+                                        List
                                     </th>
                                     <th>Nama Produk</th>
                                     <th>Nama Toko</th>
@@ -82,30 +69,31 @@ Dashboard
                                     <th>Lokasi</th>
                                     <th>Action</th>
                                 </tr>
+                                @foreach($data as $history)
                                 <tr>
+
                                     <td class="p-0 text-center">
                                         <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
-                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                            <input type="checkbox" name="scrap_data[]" data-checkboxes="mygroup" class="custom-control-input" id="{{$history['custom_text']}}" value="{{json_encode($history)}}">
+                                            <label for="{{$history['custom_text']}}" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>Masker Nih Bos</td>
-                                    <td>Toko Masker</td>
+                                    <td>{{ $history['product_name'] }}</td>
+                                    <td>{{ $history['shop_name'] }}</td>
                                     <td>
-                                        Rp. 20.000,-
+                                        {{ $history['product_price_format'] }}
                                     </td>
                                     <td>
                                         <div class="gallery gallery-md">
-                                            <div class="gallery-item" data-image="../assets/img/news/img03.jpg" data-title="Image 1"></div>
-                                            <div class="gallery-item" data-image="../assets/img/news/img14.jpg" data-title="Image 2"></div>
+                                            <img src="{{ $history['product_img_url'] }}" class="gallery-item">
                                         </div>
-                                        <div class="gallery-item gallery-hide" data-image="../assets/img/news/img01.jpg" data-title="Image 9"></div>
                                     </td>
                                     <td>
-                                        <div class="badge badge-warning">Jakarta Timur</div>
+                                        <div class="badge badge-warning">{{ $history['shop_location'] }}</div>
                                     </td>
-                                    <td><a href="#" class="btn btn-primary">Detail</a></td>
+                                    <td><a href="{{$history['product_click_url'] }}" class="btn btn-primary">Detail</a></td>
                                 </tr>
+                                @endforeach
                             </table>
                         </div>
                         <div class="float-right">

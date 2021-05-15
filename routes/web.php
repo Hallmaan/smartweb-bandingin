@@ -19,9 +19,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/profile', function () {
         return view('users.profile.index');
     });
-    Route::get('/history', function () {
-        return view('users.history.index');
-    });
+    // Route::get('/history', function () {
+    //     return view('users.history.index');
+    // });
+
+    Route::get('/history/{user_id}', 'HomeController@history')->name('history');
+
 
     Route::get('/pricing', function () {
         return view('users.pricing.index');

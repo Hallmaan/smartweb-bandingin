@@ -71,6 +71,11 @@ Dashboard
       </div>
     </div>
     <div class="col-12 mb-4">
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+    @endif
       <div class="hero bg-primary text-white">
         <div class="hero-inner">
           <h2>IKLAN HERE</h2>
@@ -122,7 +127,7 @@ Dashboard
         @foreach($data as $key)
         <?php
         for ($i = 0; $i < count($key['data_scrap']); $i++) {
-          $key['data_scrap'][$i]['iteration'] = 'checkbox-' . $i;
+          $key['data_scrap'][$i]['custom_text'] = 'checkbox-' . $i;
         }
         ?>
         <div class="card-header">
@@ -151,8 +156,8 @@ Dashboard
 
                 <td class="p-0 text-center">
                   <div class="custom-checkbox custom-control">
-                    <input type="checkbox" name="scrap_data[]" data-checkboxes="mygroup" class="custom-control-input" id="{{$scrap['iteration']}}" value="{{json_encode($scrap)}}">
-                    <label for="{{$scrap['iteration']}}" class="custom-control-label">&nbsp;</label>
+                    <input type="checkbox" name="scrap_data[]" data-checkboxes="mygroup" class="custom-control-input" id="{{$scrap['custom_text']}}" value="{{json_encode($scrap)}}">
+                    <label for="{{$scrap['custom_text']}}" class="custom-control-label">&nbsp;</label>
                   </div>
                 </td>
                 <td>{{ $scrap['product_name'] }}</td>
