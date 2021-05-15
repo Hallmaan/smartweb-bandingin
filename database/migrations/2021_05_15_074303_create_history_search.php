@@ -24,7 +24,6 @@ class CreateHistorySearch extends Migration
             $table->string('product_price_format');
             $table->string('shop_location');
             $table->string('shop_name');
-            $table->integer('site_category_id');
             $table->string('custom_text');
             $table->integer('site_category_id');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
