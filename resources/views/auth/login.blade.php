@@ -1,10 +1,6 @@
-@extends('layouts.auth-master')
+@extends('layouts.auth-login')
 
 @section('content')
-<div class="card card-primary">
-  <div class="card-header"><h4>Login</h4></div>
-
-  <div class="card-body">
     <form method="POST" action="{{ route('login') }}">
         @csrf
       <div class="form-group">
@@ -53,8 +49,6 @@
         </button>
       </div>
     </form>
-  </div>
-</div>
 <div class="mt-5 text-muted text-center">
   Don't have an account? <a href="{{ route('register') }}">Create One</a>
 </div>

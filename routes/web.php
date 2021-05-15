@@ -16,12 +16,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/search', 'HomeController@search')->name('search');
     Route::post('/save/history', 'HomeController@save_history')->name('save');
 
-    Route::get('/profile', function () {
-        return view('users.profile.index');
-    });
-    // Route::get('/history', function () {
-    //     return view('users.history.index');
+    // Route::get('/profile', function () {
+    //     return view('users.profile.index');
     // });
+
+    Route::get('/profile/{user_id}', 'UserController@profile')->name('profile');
+
+    Route::post('/profile/{user_id}/update', 'UserController@profile_update')->name('profile_update');
+    Route::post('/profile/{user_id}/update/password', 'UserController@update_password')->name('password_update');
+
+
 
     Route::get('/history/{user_id}', 'HomeController@history')->name('history');
 

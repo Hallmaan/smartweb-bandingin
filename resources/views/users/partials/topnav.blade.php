@@ -35,6 +35,7 @@
     <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user() ? Auth::user()->name : 'Guest' }}</div></a>
     <div class="dropdown-menu dropdown-menu-right">
       <div class="dropdown-title">Welcome, {{ Auth::user() ? Auth::user()->name : 'Guest' }}</div>
+      @if (Auth::check())
       <a href="{{ Auth::user() ? Auth::user()->profilelink : '' }}" class="dropdown-item has-icon">
         <i class="far fa-user"></i> Profile Settings
       </a>
@@ -42,6 +43,7 @@
       <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
         <i class="fas fa-sign-out-alt"></i> Logout
       </a>
+      @endif
     </div>
   </li>
 </ul>
