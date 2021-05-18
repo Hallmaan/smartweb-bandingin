@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function history(Request $r, $user_id){
         $user = User::findorfail($user_id);
 
-        $history = HistorySearch::where('user_id', Auth::user()->id)->paginate(5);
+        $history = HistorySearch::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(5);
         
         return view('users.history.index', ['data' => $history]);
     }

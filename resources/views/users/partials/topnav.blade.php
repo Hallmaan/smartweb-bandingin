@@ -24,19 +24,18 @@
             <i class="fas fa-code"></i>
           </div>
           <div class="dropdown-item-desc">
-            Template update is available now!
+            Updated soon
             <div class="time text-primary">2 Min Ago</div>
           </div>
         </a>
     </div>
   </li>
   <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-    <img alt="image" src="{{ Auth::user() ? Auth::user()->avatarlink : '' }}" class="rounded-circle mr-1">
     <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user() ? Auth::user()->name : 'Guest' }}</div></a>
     <div class="dropdown-menu dropdown-menu-right">
       <div class="dropdown-title">Welcome, {{ Auth::user() ? Auth::user()->name : 'Guest' }}</div>
       @if (Auth::check())
-      <a href="{{ Auth::user() ? Auth::user()->profilelink : '' }}" class="dropdown-item has-icon">
+      <a href="{{ route('profile', ['user_id' => Auth::user()->id]) }}" class="dropdown-item has-icon">
         <i class="far fa-user"></i> Profile Settings
       </a>
       <div class="dropdown-divider"></div>

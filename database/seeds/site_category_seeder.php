@@ -19,7 +19,6 @@ class site_category_seeder extends Seeder
         $data  = [
         ['name' => 'Tokopedia'],
         ['name' => 'Bukalapak'],
-        ['name' => 'Shopee'],
         ];
 
         foreach ($data as $d) {
