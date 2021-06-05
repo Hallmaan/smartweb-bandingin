@@ -46,10 +46,11 @@ class BukalapakScraping
         $show_amount = $this->limit;
         $accessToken = "Bpp5OTWsFuB1_ouXRqXwDeWXTtFkhsgJyz6vRZNf81Etmg";
         // $location = 'jakarta';
+        $max_harga = $this->max_harga;
 
         $search = str_replace(' ', '%20', $search);
 
-        $url = "https://api.bukalapak.com/multistrategy-products?prambanan_override=true&keywords=". $search ."&limit=". $show_amount ."&offset=0&page=1&facet=true&filter_non_popular_section=true&access_token=" . $accessToken;
+        $url = "https://api.bukalapak.com/multistrategy-products?prambanan_override=true&keywords=". $search ."&price_range=:".$max_harga."&limit=". $show_amount ."&offset=0&page=1&facet=true&filter_non_popular_section=true&access_token=" . $accessToken;
 
         $data = $this->http_request($url);
         // dd($data);
