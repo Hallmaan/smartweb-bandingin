@@ -44,7 +44,7 @@ class BukalapakScraping
     {
         $search = $this->nama_barang;
         $show_amount = $this->limit;
-        $accessToken = "R8QNHVyZnjkqvHknKo7gW_akpy8TmgGGBF8kQL2WX0-x0w";
+        $accessToken = "Bpp5OTWsFuB1_ouXRqXwDeWXTtFkhsgJyz6vRZNf81Etmg";
         // $location = 'jakarta';
 
         $search = str_replace(' ', '%20', $search);
