@@ -11,6 +11,7 @@
 |
 */
 Route::get('/', 'HomeController@home')->name('dashboard');
+Route::get('/guest_book', 'HomeController@guest_book')->name('guest_book');
 Route::group(['middleware' => ['auth']], function() {
 
     Route::post('/search', 'HomeController@search')->name('search');

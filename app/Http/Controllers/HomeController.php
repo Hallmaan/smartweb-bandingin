@@ -22,6 +22,11 @@ class HomeController extends Controller
         // $this->middleware('auth');
     }
 
+    public function guest_book(Request $r){
+        $user = User::select('name')->get();
+        return view('guest_book', ['data' => $user]);
+    }
+
     public function history(Request $r, $user_id){
         $user = User::findorfail($user_id);
 
