@@ -42,6 +42,10 @@
       <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
         <i class="fas fa-sign-out-alt"></i> Logout
       </a>
+      @else
+      <a href="{{ route('login') }}" class="dropdown-item has-icon text-info">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </a>
       @endif
     </div>
   </li>

@@ -16,4 +16,10 @@
       <li class="{{ Route::is('profile') ? 'active' : '' }}"><a class="nav-link" href="{{route('login')}}"><i class="fa fa-user-circle"></i> <span>Profile Account</span></a></li>
       @endif
     </ul>
+    
+    <div class="hero bg-primary text-white mt-5">
+        <div class="hero-inner h-100">
+          <h2>IKLAN HERE</h2>
+        </div>
+    </div>
 </aside>
