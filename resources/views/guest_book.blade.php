@@ -17,7 +17,7 @@ Dashboard
   <div class="section-body">
     <h2 class="section-title">Guest book</h2>
     <p class="section-lead">
-      Change information about yourself on this page.
+      Information about user list (guest book)
     </p>
     <div class="row">
     <div class="col-12 col-md-6 col-lg-12">
