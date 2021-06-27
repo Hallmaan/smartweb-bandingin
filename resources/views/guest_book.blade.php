@@ -8,7 +8,7 @@ Dashboard
 <!-- Main Content -->
 <section class="section">
   <div class="section-header">
-    <h1>Iklan Here</h1>
+    <h1>Guest Book</h1>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item">Dashboard</div>
       <div class="breadcrumb-item active">Guest Book</div>
